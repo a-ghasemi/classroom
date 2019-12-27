@@ -14,7 +14,8 @@ class AbsentPresentController extends Controller
      */
     public function index()
     {
-        //
+        $items = AbsentPresent::paginate(env('PAGINATIONS','10'));
+        return view('panel.absentpresents.index')->withItems($items);
     }
 
     /**
@@ -24,7 +25,7 @@ class AbsentPresentController extends Controller
      */
     public function create()
     {
-        //
+        return view('panel.absentpresents.create');
     }
 
     /**
@@ -35,7 +36,8 @@ class AbsentPresentController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        AbsentPresent::create($request->all());
+        return redirect()->route('panel.absentpresents.index');
     }
 
     /**
@@ -46,7 +48,7 @@ class AbsentPresentController extends Controller
      */
     public function show(AbsentPresent $absentPresent)
     {
-        //
+        return view('panel.absentpresents.show')->withItem($absentPresent);
     }
 
     /**
@@ -57,7 +59,7 @@ class AbsentPresentController extends Controller
      */
     public function edit(AbsentPresent $absentPresent)
     {
-        //
+        return view('panel.absentpresents.edit')->withItem($absentPresent);
     }
 
     /**
@@ -69,7 +71,8 @@ class AbsentPresentController extends Controller
      */
     public function update(Request $request, AbsentPresent $absentPresent)
     {
-        //
+        $absentPresent->update($request->all());
+        return redirect()->route('panel.absentpresents.index');
     }
 
     /**
@@ -80,6 +83,20 @@ class AbsentPresentController extends Controller
      */
     public function destroy(AbsentPresent $absentPresent)
     {
-        //
+        $absentPresent->delete();
+        return redirect()->route('panel.absentpresents.index');
     }
+
+    public function absent($id)
+    {
+        AbsentPresent::find($id)->update(['present' => false]);
+        return redirect()->route('panel.absentpresents.index');
+    }
+
+    public function present($id)
+    {
+        AbsentPresent::find($id)->update(['present' => true]);
+        return redirect()->route('panel.absentpresents.index');
+    }
+
 }

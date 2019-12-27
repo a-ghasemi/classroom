@@ -14,7 +14,8 @@ class StudentController extends Controller
      */
     public function index()
     {
-        //
+        $items = Student::paginate(env('PAGINATIONS','10'));
+        return view('panel.students.index')->withItems($items);
     }
 
     /**
@@ -24,7 +25,7 @@ class StudentController extends Controller
      */
     public function create()
     {
-        //
+        return view('panel.students.create');
     }
 
     /**
@@ -35,7 +36,8 @@ class StudentController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        Student::create($request->all());
+        return redirect()->route('panel.students.index');
     }
 
     /**
@@ -46,7 +48,7 @@ class StudentController extends Controller
      */
     public function show(Student $student)
     {
-        //
+        return view('panel.students.show')->withItem($student);
     }
 
     /**
@@ -57,7 +59,7 @@ class StudentController extends Controller
      */
     public function edit(Student $student)
     {
-        //
+        return view('panel.students.edit')->withItem($student);
     }
 
     /**
@@ -69,7 +71,8 @@ class StudentController extends Controller
      */
     public function update(Request $request, Student $student)
     {
-        //
+        $student->update($request->all());
+        return redirect()->route('panel.students.index');
     }
 
     /**
@@ -80,6 +83,7 @@ class StudentController extends Controller
      */
     public function destroy(Student $student)
     {
-        //
+        $student->delete();
+        return redirect()->route('panel.students.index');
     }
 }

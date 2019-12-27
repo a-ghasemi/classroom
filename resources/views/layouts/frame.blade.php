@@ -83,7 +83,21 @@
             <div class="container">
                 <div class="row justify-content-center">
                     @include('include.sidebar')
-                    @yield('content')
+                    <div class="col-md-9">
+                        <div class="card">
+                            <div class="card-header">@yield('BlockTitle','')</div>
+
+                            <div class="card-body">
+                                @if (session('status'))
+                                    <div class="alert alert-success" role="alert">
+                                        {{ session('status') }}
+                                    </div>
+                                @endif
+
+                                @yield('content')
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </main>

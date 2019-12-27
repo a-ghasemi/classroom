@@ -1,6 +1,7 @@
 @extends('layouts.frame')
 
-@section('content')
+@section('BlockTitle','Students | List')
 
+@section('content')
 @endsection
 
