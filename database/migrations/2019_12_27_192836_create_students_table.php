@@ -14,7 +14,10 @@ class CreateStudentsTable extends Migration
     public function up()
     {
         Schema::create('students', function (Blueprint $table) {
+            $table->engine = 'MyIsam';
+
             $table->bigIncrements('id');
+            $table->string('fullname');
             $table->timestamps();
         });
     }

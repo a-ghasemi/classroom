@@ -14,8 +14,15 @@ class CreateAbsentPresentsTable extends Migration
     public function up()
     {
         Schema::create('absent_presents', function (Blueprint $table) {
+            $table->engine = 'MyIsam';
+
             $table->bigIncrements('id');
+            $table->bigInteger('student_id');
+            $table->date('checkdate');
+            $table->boolean('present')->default(false);
             $table->timestamps();
+
+            $table->unique(['student_id','checkdate']);
         });
     }
 
