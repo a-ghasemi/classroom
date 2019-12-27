@@ -37,7 +37,7 @@ class StudentController extends Controller
     public function store(Request $request)
     {
         Student::create($request->all());
-        return redirect()->route('panel.students.index');
+        return redirect()->route('panel.student.index');
     }
 
     /**
@@ -72,7 +72,7 @@ class StudentController extends Controller
     public function update(Request $request, Student $student)
     {
         $student->update($request->all());
-        return redirect()->route('panel.students.index');
+        return redirect()->route('panel.student.index');
     }
 
     /**
@@ -84,6 +84,6 @@ class StudentController extends Controller
     public function destroy(Student $student)
     {
         $student->delete();
-        return redirect()->route('panel.students.index');
+        return redirect()->route('panel.student.index');
     }
 }
