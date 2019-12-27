@@ -6,5 +6,6 @@
     <a href="{{ route('panel.student.index') }}">[<]&nbsp;Back</a>
     <hr/>
 
+    <b>Full Name: </b>{{ $item->fullname }}<br>
 @endsection
 
