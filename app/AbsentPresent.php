@@ -13,4 +13,8 @@ class AbsentPresent extends Model
     public function student(){
         return $this->belongsTo(Student::class, 'student_id');
     }
+
+    public function setCheckdateAttribute($value){
+        $this->attributes['checkdate'] = trim(substr($value,0,10));
+    }
 }

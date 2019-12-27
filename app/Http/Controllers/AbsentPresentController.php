@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\AbsentPresent;
+use App\Student;
 use Illuminate\Http\Request;
 
 class AbsentPresentController extends Controller
@@ -25,7 +26,7 @@ class AbsentPresentController extends Controller
      */
     public function create()
     {
-        return view('panel.absentpresents.create');
+        return view('panel.absentpresents.create')->withStudents(Student::all());
     }
 
     /**
@@ -37,7 +38,7 @@ class AbsentPresentController extends Controller
     public function store(Request $request)
     {
         AbsentPresent::create($request->all());
-        return redirect()->route('panel.absentpresents.index');
+        return redirect()->route('panel.absentpresent.index');
     }
 
     /**
@@ -46,9 +47,9 @@ class AbsentPresentController extends Controller
      * @param  \App\AbsentPresent  $absentPresent
      * @return \Illuminate\Http\Response
      */
-    public function show(AbsentPresent $absentPresent)
+    public function show(AbsentPresent $absentpresent)
     {
-        return view('panel.absentpresents.show')->withItem($absentPresent);
+        return view('panel.absentpresents.show')->withItem($absentpresent);
     }
 
     /**
@@ -57,9 +58,9 @@ class AbsentPresentController extends Controller
      * @param  \App\AbsentPresent  $absentPresent
      * @return \Illuminate\Http\Response
      */
-    public function edit(AbsentPresent $absentPresent)
+    public function edit(AbsentPresent $absentpresent)
     {
-        return view('panel.absentpresents.edit')->withItem($absentPresent);
+        return view('panel.absentpresents.edit')->withItem($absentpresent)->withStudents(Student::all());;
     }
 
     /**
@@ -69,10 +70,12 @@ class AbsentPresentController extends Controller
      * @param  \App\AbsentPresent  $absentPresent
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, AbsentPresent $absentPresent)
+    public function update(Request $request, AbsentPresent $absentpresent)
     {
-        $absentPresent->update($request->all());
-        return redirect()->route('panel.absentpresents.index');
+        $data = $request->all();
+        if(!isset($data['present'])) $data['present'] = false;
+        $absentpresent->update($data);
+        return redirect()->route('panel.absentpresent.index');
     }
 
     /**
@@ -81,16 +84,16 @@ class AbsentPresentController extends Controller
      * @param  \App\AbsentPresent  $absentPresent
      * @return \Illuminate\Http\Response
      */
-    public function destroy(AbsentPresent $absentPresent)
+    public function destroy(AbsentPresent $absentpresent)
     {
-        $absentPresent->delete();
-        return redirect()->route('panel.absentpresents.index');
+        $absentpresent->delete();
+        return redirect()->route('panel.absentpresent.index');
     }
 
     public function absent($id)
     {
         AbsentPresent::find($id)->update(['present' => false]);
-        return redirect()->route('panel.absentpresents.index');
+        return redirect()->route('panel.absentpresent.index');
     }
 
     public function present($id)

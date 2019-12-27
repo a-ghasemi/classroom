@@ -25,11 +25,11 @@
                         {{ $item->fullname }}
                     </td>
                     <td>
-                        <a href="{{route('panel.student.show',[ $item->id ])}}">Show</a>
+                        <a href="{{route('panel.student.show',[ $item ])}}">Show</a>
                         &nbsp;|&nbsp;
-                        <a href="{{route('panel.student.edit',[ $item->id ])}}">Edit</a>
+                        <a href="{{route('panel.student.edit',[ $item ])}}">Edit</a>
                         &nbsp;|&nbsp;
-                        <form action="{{route('panel.student.destroy',[$item->id])}}" style="display: inline-block" method="post">
+                        <form action="{{route('panel.student.destroy',[ $item ])}}" style="display: inline-block" method="post">
                             @csrf
                             @method('delete')
                             <a href="javascript:;" onclick="if(confirm('Are you sure to delete student \'{{$item->fullname}}\' ?')) $(this).closest('form').submit()">Delete</a>
