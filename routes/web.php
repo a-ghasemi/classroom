@@ -18,5 +18,10 @@ Route::get('/', function () {
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
+Route::middleware('auth')->get('/logout','Auth\LoginController@logout')->name('logout');
 
-Route::resource('/student','StudentController');
+Route::name('panel.')->prefix('panel/')->middleware('auth')->group(function (){
+    Route::resource('/student','StudentController');
+    Route::resource('/absentpresent','AbsentPresentController');
+});
+
