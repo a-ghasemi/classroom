@@ -16,3 +16,12 @@ use Illuminate\Http\Request;
 Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
+
+Route::prefix('absentpresent/')->middleware('auth:api')->group(function (){
+    Route::get('/','AbsentPresentApiController@index');
+    Route::get('/{id}','AbsentPresentApiController@show');
+    Route::post('/','AbsentPresentApiController@store');
+    Route::post('/{id}','AbsentPresentApiController@update');
+    Route::post('/delete/{id}','AbsentPresentApiController@destroy');
+});
+
