@@ -10,3 +10,12 @@
 <h2>Classroom Simple Moderation Project</h2>
 
 <b>API Documentation on Postman : </b><a href="https://www.getpostman.com/collections/e6148f3edb85c4af8f7c">https://www.getpostman.com/collections/e6148f3edb85c4af8f7c</a>
+
+<h3>How to initialize?</h3>
+<ul>
+    <li>Clone the project</li>
+    <li>Run Command : &nbsp;&nbsp;&nbsp;&nbsp;<i>composer install</i></li>
+    <li>Update Database info in .env</li>
+    <li>Run command : &nbsp;&nbsp;&nbsp;&nbsp;<i>php artisan migrate:fresh --seed</i></li>
+    <li>Enjoy</li>
+</ul>
